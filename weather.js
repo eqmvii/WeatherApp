@@ -2,18 +2,17 @@
 // ES6 code used regularly
 // Allows user to see weather at their location or in a place they search
 // Shows that location on a map
-// And has some jquery animations
+// And has some jquery animations. Because. 
 
 "use strict";
 
 var wapp = {}; // object to hold the app's variables
 wapp.coords = [42.03, -93.63];
 wapp.dbg = false; // true for debugging console logs, otherwise false
-wapp.units = "F"; // C or F
-wapp.lockout = false; // rate limiter on random
+wapp.units = "F"; // C or F; default F
+wapp.lockout = false; // rate limiter on API requests from clicking the random button
 wapp.searchflag = false; // flag when better data exists for the place name
-wapp.monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December" ];
+wapp.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
 wapp.picturelinks = {
     cloudy: "./img/cloudy.png",
     partlycloudy: "./img/partlycloudy.png",
@@ -117,7 +116,7 @@ $(document).ready(function ()
         modal: true,
         buttons: {
             "DO IT": function () { // Animate the site exploding and then rebuilding
-                $("div.testbox").slideUp({ duration: 1000 });
+                $("div.flexitem").slideUp({ duration: 1000 });
                 setTimeout(function () {
                     $("a.fa").toggle("explode");
                 }, 1500);
@@ -134,7 +133,7 @@ $(document).ready(function ()
                     $("a.fa").slideDown({ duration: 500 });
                 }, 4500);
                 setTimeout(function () {
-                    $("div.testbox").slideDown({ duration: 500 });
+                    $("div.flexitem").slideDown({ duration: 500 });
                 }, 5000);
                 setTimeout(function () {
                     $("div#splashtop").slideDown({ duration: 500 });
@@ -148,6 +147,7 @@ $(document).ready(function ()
     }); // end diag mayhem
 });
 
+// Google Maps callback function, also initializes autocomplete feature
 function initMap() {
     // Create a map object and specify the DOM element for display.
     wapp.map = new google.maps.Map(document.getElementById("map"), {
@@ -446,16 +446,14 @@ function initMap() {
         title: "Weather",
         map: wapp.map
     });
-
-    // initialize autocomplete stuff:
-    // Code adapted from google maps autocomplete web API
+    // initialize autocomplete stuff: Code adapted from google maps autocomplete web API
     // Create the autocomplete object, restricting the search to geographical location types.
     wapp.autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */(document.getElementById("autocomplete")),
         { types: ["geocode"] });
+}
 
-};
-
+// Re-center the map with new coordinates
 function updateMap() {
     var tempstr;
     if (wapp.units === "F") { tempstr = wapp.tempf; }
@@ -468,22 +466,24 @@ function updateMap() {
     });
     wapp.marker.setMap(wapp.map);
 
-    // Make the icon clickable and include weather details
+    // Make the icon clickable and include some weather details
     var infowindow = new google.maps.InfoWindow({
         content: wapp.weatherstring
     });
     wapp.marker.addListener("click", function () {
         infowindow.open(wapp.map, wapp.marker);
     });
-};
+}
 
 function getRandomCoord() {
+    // Pick random coordinates that are kinda bounded by roughly where the U.S. is. 
     wapp.coords[0] = Math.floor((Math.random() * 30) + 1) + 20;
     wapp.coords[1] = Math.floor((Math.random() * 50) + 1) - 120;
     if (wapp.dbg) console.info(`New random coords: ${wapp.coords[0]}, ${wapp.coords[1]}.`);
     // if (!wapp.map) return;
-};
+}
 
+// For testing purposes, weather data formatted as the OpenWeatherMap API returns it
 function getFakeJSON() {
     var fakeJSON = {
         "coord": { "lon": 34.9719, "lat": 138.9304 },
@@ -499,8 +499,10 @@ function getFakeJSON() {
         "cod": 200
     };
     return fakeJSON;
-};
+}
 
+
+// Retrieve weather data if necessary
 function getWeather() {
     /* for initial setup, use the fakeJSON
     wapp.rawData = getFakeJSON();
@@ -509,7 +511,6 @@ function getWeather() {
 
     // Create or load the cache of lat/long points
     checkCache();
-
     // Check the cache to see if new data needs to be requested
     let keystring = "" + wapp.coords[0].toFixed(0) + wapp.coords[1].toFixed(0);
     if (wapp.dbg) console.log("Keystring: " + keystring);
@@ -526,10 +527,9 @@ function getWeather() {
         } // We have data within the last 30 minutes
         else if (wapp.dbg) console.log(`Old data, last checked ${(timeElapsed / (60 * 1000)).toFixed(1)} minutes ago.`)
     }
-
     //Otherwise, request weather data, using promises, because it's 2017:
-    var myFirstPromise = new Promise((resolve, reject) => {
-        wapp.url = `http://api.openweathermap.org/data/2.5/weather?lat=${wapp.coords[0]}&lon=${wapp.coords[1]}&appid=e77d7680a7c88535885d9d87ef72b5a6`;
+    var myFirstPromise = new Promise((resolve, reject) => { // cross origin hack to make it work online and not only locally:
+        wapp.url = ` https://cors-anywhere.herokuapp.com/api.openweathermap.org/data/2.5/weather?lat=${wapp.coords[0]}&lon=${wapp.coords[1]}&appid=e77d7680a7c88535885d9d87ef72b5a6`;
         $.ajax({
             url: wapp.url,
             jsonp: "callback",
@@ -562,8 +562,9 @@ function getWeather() {
         if (wapp.dbg) console.log("Promise Resolved!", response);
         displayWeather();
     });
-};
+}
 
+// Show the weather data
 function displayWeather() {
     // If we're nowhere, try another random location to see if we get somwhere
     if (wapp.rawData.name === "")
@@ -582,33 +583,26 @@ function displayWeather() {
     wapp.tempf = wapp.tempf.toFixed(0);
     wapp.tempc = wapp.tempc.toFixed(0);
     if (wapp.dbg) console.info(`Temp(K): ${wapp.tempk}, temp(C): ${wapp.tempc}, temp(F): ${wapp.tempf}.`);
-
     // Get the weather string if we don't have a better one
     wapp.weatherstring = wapp.rawData.weather[0].description[0].toUpperCase() + wapp.rawData.weather[0].description.substring(1);
-
-    // Get the place name if we don't have a better one
+    // Get the place name if we don't have a better one from the Google API
     if (wapp.searchflag === false) {
         wapp.place = `${wapp.rawData.name}`;
     }
     wapp.searchflag = false;
-
     if (wapp.dbg) console.info(`Location: ${wapp.place}, Weather: ${wapp.weatherstring}`);
-
     // Cache the new weather data
-
     let latString = wapp.coords[0].toFixed(0) + "";
     let longString = wapp.coords[1].toFixed(0) + "";
     let keystring = latString + longString;
     wapp.cache[keystring] = wapp.rawData;
     if (wapp.dbg) console.info(wapp.cache);
-
     // reset the search box
     $("#autocomplete").attr("placeholder", "Search for weather data...");
     $("#autocomplete").val("");
-
     // Store the cache in local storage
     localStorage.setItem("cache", JSON.stringify(wapp.cache));
-
+    // Show all of the data
     $("#location").html(wapp.place);
     $("#weathertext").html(wapp.weatherstring);
     if (wapp.units === "F") {
@@ -617,13 +611,13 @@ function displayWeather() {
     else {
         $("span#temp").html(wapp.tempc);
     }
-
     // Choose an appropriate weather picture
     chooseWeatherPicture();
     // Snap to the new map location
     updateMap();
-};
+}
 
+// If possible, get the user's current location from the browser
 function getMyLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function (position) {
@@ -638,10 +632,10 @@ function getMyLocation() {
             });
         } else {
             console.error("Something's broken");
-            // TODO: Handle error if user can't use navigator
         }
-};
+}
 
+// Toggle betweeen C and F
 function changeUnits() {
     if (wapp.units === "F") {
         $("span#temp").html(wapp.tempc);
@@ -653,8 +647,8 @@ function changeUnits() {
         $("span#units").html("F");
         wapp.units = "F";
     }
-    updateMap(); // to update the marker
-};
+    updateMap(); // to update the marker display on the map
+}
 
 function chooseWeatherPicture() {
     // Cloudy
@@ -677,7 +671,6 @@ function chooseWeatherPicture() {
     else {
         $("img#weatherpicture").attr("src", "http://i.imgur.com/CQC4Iv6.png");
     }
-
 }
 
 function formattedTime() {
@@ -695,9 +688,9 @@ function checkCache() {
     } else { // otherwise read it
         wapp.cache = JSON.parse(localStorage.getItem("cache"));
     }
-};
+}
 
-// Bias the autocomplete object to the map's current location
+// Bias the autocomplete object to the map's current location, per Google autocomplete API examples
 function geolocate() {
     var geolocation = { lat: wapp.coords[0], lng: wapp.coords[1] };
     var circle = new google.maps.Circle({ center: geolocation, radius: 1 });

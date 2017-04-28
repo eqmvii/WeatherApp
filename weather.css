@@ -1,6 +1,5 @@
 ﻿body {
     font-family: Verdana;
-    /* background-color: #9abcc7; */  
 }
 
 h1#banner {
@@ -16,12 +15,6 @@ h1, h2, h3, h4, h5, h6 {
     margin: 12px;
 }
 
-#map {
-    height: 100%;
-}
-
-
-
 #splashtop {
     background-image: url("img/bannertuscan.png");
     background-repeat: no-repeat;
@@ -34,23 +27,11 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: 1px solid black;
 }
 
-#splashbottom {
-    background-image: url("img/bannertuscan.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    margin: 0px -10px 0px -10px;
-    /*width: 110%;*/
-    height: 260px; 
-    line-height: 220px;
-    /*border: 5px solid black;*/ 
-    display: none;
-}
-
 div.ui-datepicker { /* make calendar slightly smaller */
     font-size:14px;
 }
 
-div#flexcontainer { /* mlexbox Container */
+div#flexcontainer { /* flexbox Container */
     display: flex; /* turns it on */
     flex-direction: row; /* makes it work as rows. Row is default. */
     flex-wrap: wrap; /* default, all items attempt to be on one line */
@@ -65,7 +46,6 @@ div#flexcontainer { /* mlexbox Container */
     max-width: 1370px;
     margin-left: auto;
     margin-right: auto;
-
 }
 
 .flexitem { /* general class for flexbox item */
@@ -73,24 +53,15 @@ div#flexcontainer { /* mlexbox Container */
     flex-shrink: 1; /* allows shrinking if necessary; defaults to 1 */
     flex-basis: auto; /* initial element size prior to allocating extra space; defaults to auto*/
     /* flex: 0 1 auto; */ /* shorthand for flex-grow, flex-shrink, and flex-basis */
-    margin: auto;        
-}
-
-.testbox {
+    margin: auto;      
     min-width: 260px;
     width: 26%;
     height: 240px; 
     padding: 6px;
-    text-align: center;   
+    text-align: center;    
 }
 
-div#searchborder {
-    height: 130px;
-    width: 300px;
-    outline: 1px solid red;
-}
-
-.hiddenitems {
+.hiddenitems { /* hides the jqueryui popup boxes */
     display: none;
 }
 
@@ -100,12 +71,13 @@ img#weatherpicture {
     border-radius: 50%;
 }
 
-#autocomplete {
+
+#datehouse{
     width: 250px;
-    height: 20px;
-    padding: 1px;
-    margin-bottom: 16px;
-    margin-top: 8px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4px;
+    border: 1px solid black;
 }
 
 #footer {
@@ -118,26 +90,15 @@ img#weatherpicture {
     border-top: 3px solid black;
 }
 
-/* To add a horizontal line at the top of the page */
-/* 
-div#foraline{
-    width: 800px;
-    height:1px;
-    border-bottom: 2px solid black;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 20px;
-} */
-
 .footertext {
-        font-size: 12px;
+    font-size: 12px;
 }
 
 #footertextsmaller {
-        font-size: 8px;
+    font-size: 8px;
 }
 
-#map {
+#map { /* Google Map element */
     border: 1px solid black;
     border-radius: 3px;
     height: 240px;
@@ -146,7 +107,15 @@ div#foraline{
     margin-right: auto;
 }
 
-/* Code adapted from http://www.bestcssbuttongenerator.com */
+#autocomplete { /* google places autocomplete API search element */
+    width: 250px;
+    height: 20px;
+    padding: 1px;
+    margin-bottom: 16px;
+    margin-top: 8px;
+}
+
+/* Button code adapted from http://www.bestcssbuttongenerator.com */
 .controlButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #f7c5c0;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #f7c5c0;
@@ -192,14 +161,6 @@ div#foraline{
 	top:1px;
 }
 
-#datehouse{
-    width: 250px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 4px;
-    border: 1px solid black;
-}
-
 /* Font Awesome fonts/styles/concept from w3schools.com */
 /* Style all font awesome icons */
 .fa {
@@ -216,8 +177,6 @@ div#foraline{
 .fa:hover {
     opacity: 0.7;
 }
-
-/* Set a specific color for each brand */
 
 /* Facebook */
 .fa-facebook {
@@ -244,7 +203,6 @@ div#foraline{
 }
 
 /* Github */
-
 .fa-github {
     background: #000;
     color: white;
