@@ -547,7 +547,7 @@ function getWeather() {
             }
         });
         setTimeout(function () {
-            reject("IT FAILED!"); // No response
+            reject("IT FAILED!"); // No response after two minutes
         }, 120000);
     });
 
