@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="weather.css" />
+    <link rel="stylesheet" type ="text/css" href="./jqueryui/jquery-ui.css">
+    <!--Font Awesome icons for social media buttons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="./jqueryui/external/jquery/jquery.js"></script>
+    <script src="./jqueryui/jquery-ui.min.js"></script>
+    <!--<script src="../scripts/jquery-3.2.1.min.js" type="text/javascript"></script>-->
+    <meta charset="utf-8" />
+    <title>No Weathermen</title>
+</head>
+<body>
+        <div id="splashtop">
+            <h1 id="banner"></h1>
+        </div>
+    <div id="foraline"></div>
+        <div id="flexcontainer">
+
+            <div id="item5" class="flexitem testbox">
+                <br />
+                <img src="./img/sunny.png" id="weatherpicture" />
+            </div>
+
+            <div id="item2" class="flexitem testbox">
+                <h3 id="location">No data, fake or otherwise, pulled.</h3>
+                <h1><span id="temp">72</span>° <span id="units">F</span></h1>
+                <h3 id="weathertext">Sunny</h3>
+                <br />
+                <h4 id="thetime">:</h4>
+                <h4 id="thedate">:</h4>
+            </div>
+
+            <div id="item6" class="flexitem testbox">
+                <div id="map">[Map load error and/or map turned off]</div>
+            </div>
+
+            <div id="item4" class="flexitem testbox">
+                <div id="datehouse"><div id="date"></div></div>
+            </div>
+
+            <div id="item1" class="flexitem testbox">
+                <input id="autocomplete" placeholder="Search for weather data..." onFocus="geolocate()" type="text" /><br />
+                <a href="#" id="weathersearch" class="controlButton">Submit</a>
+            </div>
+
+            <div id="item3" class="flexitem testbox">
+                <a href="#" class="controlButton" id="changeunits">C/F</a>
+                <a href="#" class="controlButton" id="rnd">Random</a><br />
+                <a href="#" class="controlButton" id="myloc">My location</a>
+                <!--<a href="#" id="clearcache" class="controlButton">Clear cache</a><br />-->
+                <a href="#" id="no" class="controlButton">Mayhem</a>
+            </div>
+
+        </div>
+
+        <br />
+        <div id="footer">
+            <a href="https://github.com/eqmvii" target="_blank" class="fa fa-facebook"></a>
+            <a href="https://github.com/eqmvii" target="_blank" class="fa fa-twitter"></a>
+            <a href="https://github.com/eqmvii" target="_blank" class="fa fa-github"></a>
+            <a href="https://github.com/eqmvii" target="_blank" class="fa fa-linkedin"></a>
+            <a href="https://github.com/eqmvii" target="_blank" class="fa fa-reddit"></a>
+            <br />
+            <p class="footertext">Powered by OpenWeatherMap, Google, and Eric. Terrible MS paint weather pictures are also by Eric.</p><p class="footertext"> All social media buttons intentionally point to github, others for aesthetics only. </p>
+            <p id="footertextsmaller">Void where prohibited. Some restrictions may apply.</p>
+        </div>
+
+        <div id="hiddenitems" class="hiddenitems">
+            <div id="dialog-mayhem" title="This is a bad idea">
+                <p>You pressed the 'Mayhem' button. If you proceed, the entire site will become unstable and/or fall apart immediately. Continue?</p>
+            </div>
+            <div id="dialog-myloc" title="Allow location access">
+                <p>Your browser will now ask to use your location to find the weather, if possible</p>
+            </div>
+        </div>
+    
+    <script src="weather.js" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9LyCmC6m78DoWS-cRB3y4zem8GlLHfiA&libraries=places&callback=initMap"
+            async defer></script>
+    
+
+    
+    <!--    
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9LyCmC6m78DoWS-cRB3y4zem8GlLHfiA&libraries=places&callback=initAutocomplete"></script>
+    -->
+
+</body>
+</html>

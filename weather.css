@@ -1,0 +1,251 @@
+﻿body {
+    font-family: Verdana;
+    /* background-color: #9abcc7; */  
+}
+
+h1#banner {
+    color: black;
+    margin: 0px;
+    text-align: center;    
+    font-size: 100px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #850c0d;
+    margin: 12px;
+}
+
+#map {
+    height: 100%;
+}
+
+
+
+#splashtop {
+    background-image: url("img/bannertuscan.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: -10px -10px 50px -10px;
+    /*width: 110%;*/
+    height: 160px; 
+    line-height: 220px;
+    /*border: 5px solid black;*/ 
+    border-bottom: 1px solid black;
+}
+
+#splashbottom {
+    background-image: url("img/bannertuscan.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px -10px 0px -10px;
+    /*width: 110%;*/
+    height: 260px; 
+    line-height: 220px;
+    /*border: 5px solid black;*/ 
+    display: none;
+}
+
+div.ui-datepicker { /* make calendar slightly smaller */
+    font-size:14px;
+}
+
+div#flexcontainer { /* mlexbox Container */
+    display: flex; /* turns it on */
+    flex-direction: row; /* makes it work as rows. Row is default. */
+    flex-wrap: wrap; /* default, all items attempt to be on one line */
+    /* flex-flow: . . .  */ /* shorthand flex-direction and flex-wrap */
+    justify-content: space-around; /* details horizontal alignment */
+    align-items: flex-start; /* cross-axis alignment control, like justify content for perp. axis */
+    align-content: stretch; /* aligns lines with extra space in perp. axis */
+    /* height: 900px; */
+    /* background-color: #febaba;*/
+    /* outline: 1px solid blue; */
+    /* height: 650px; */ /* Without height, items squish*/
+    max-width: 1370px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+.flexitem { /* general class for flexbox item */
+    flex-grow: 0; /* defines ability to grow if necessary; defaults to 0 */
+    flex-shrink: 1; /* allows shrinking if necessary; defaults to 1 */
+    flex-basis: auto; /* initial element size prior to allocating extra space; defaults to auto*/
+    /* flex: 0 1 auto; */ /* shorthand for flex-grow, flex-shrink, and flex-basis */
+    margin: auto;        
+}
+
+.testbox {
+    min-width: 260px;
+    width: 26%;
+    height: 240px; 
+    padding: 6px;
+    text-align: center;   
+}
+
+div#searchborder {
+    height: 130px;
+    width: 300px;
+    outline: 1px solid red;
+}
+
+.hiddenitems {
+    display: none;
+}
+
+img#weatherpicture {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+}
+
+#autocomplete {
+    width: 250px;
+    height: 20px;
+    padding: 1px;
+    margin-bottom: 16px;
+    margin-top: 8px;
+}
+
+#footer {
+    margin-top: 26px;
+    padding-top: 26px;
+    width: 920px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-top: 3px solid black;
+}
+
+/* To add a horizontal line at the top of the page */
+/* 
+div#foraline{
+    width: 800px;
+    height:1px;
+    border-bottom: 2px solid black;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+} */
+
+.footertext {
+        font-size: 12px;
+}
+
+#footertextsmaller {
+        font-size: 8px;
+}
+
+#map {
+    border: 1px solid black;
+    border-radius: 3px;
+    height: 240px;
+    width: 240px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Code adapted from http://www.bestcssbuttongenerator.com */
+.controlButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	box-shadow:inset 0px 1px 0px 0px #f7c5c0;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fc8d83), color-stop(1, #e4685d));
+	background:-moz-linear-gradient(top, #fc8d83 5%, #e4685d 100%);
+	background:-webkit-linear-gradient(top, #fc8d83 5%, #e4685d 100%);
+	background:-o-linear-gradient(top, #fc8d83 5%, #e4685d 100%);
+	background:-ms-linear-gradient(top, #fc8d83 5%, #e4685d 100%);
+	background:linear-gradient(to bottom, #fc8d83 5%, #e4685d 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fc8d83', endColorstr='#e4685d',GradientType=0);
+	background-color:#fc8d83;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #d83526;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+    width: 86px;
+    height: 25px;
+    line-height: 25px;
+    margin: 10px 0px 0px 10px;
+}
+.controlButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #e4685d), color-stop(1, #fc8d83));
+	background:-moz-linear-gradient(top, #e4685d 5%, #fc8d83 100%);
+	background:-webkit-linear-gradient(top, #e4685d 5%, #fc8d83 100%);
+	background:-o-linear-gradient(top, #e4685d 5%, #fc8d83 100%);
+	background:-ms-linear-gradient(top, #e4685d 5%, #fc8d83 100%);
+	background:linear-gradient(to bottom, #e4685d 5%, #fc8d83 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#e4685d', endColorstr='#fc8d83',GradientType=0);
+	background-color:#e4685d;
+}
+.controlButton:active {
+	position:relative;
+	top:1px;
+}
+
+#datehouse{
+    width: 250px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 4px;
+    border: 1px solid black;
+}
+
+/* Font Awesome fonts/styles/concept from w3schools.com */
+/* Style all font awesome icons */
+.fa {
+    padding: 10px;
+    width: 18px;
+    height: 18px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+    margin-left: 12px;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+    opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+/* Linkedin */
+.fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+/* Reddit */
+.fa-reddit {
+  background: #ff5700;
+  color: white;
+}
+
+/* Github */
+
+.fa-github {
+    background: #000;
+    color: white;
+}
