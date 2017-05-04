@@ -8,7 +8,7 @@
 
 var wapp = {}; // object to hold the app's variables
 wapp.coords = [42.03, -93.63];
-wapp.dbg = false; // true for debugging console logs, otherwise false
+wapp.dbg = true; // true for debugging console logs, otherwise false
 wapp.units = "F"; // C or F; default F
 wapp.lockout = false; // rate limiter on API requests from clicking the random button
 wapp.searchflag = false; // flag when better data exists for the place name
@@ -36,16 +36,16 @@ $(document).ready(function ()
     $("#weathersearch").click(function () {
         if (wapp.dbg) console.log("Autocomplete object: ", wapp.autocomplete);
         //console.log(wapp.autocomplete.gm_accessors_);
-        //console.log(wapp.autocomplete.gm_accessors_.place.Fc.place.geometry.viewport);
-        if (!wapp.autocomplete.gm_accessors_.place.Fc.place)
+        //console.log(wapp.autocomplete.gm_accessors_.place.Ec.place.geometry.viewport);
+        if (!wapp.autocomplete.gm_accessors_.place.Ec.place)
         {
             $("#autocomplete").attr("placeholder", "Error: pick location before searching");
             $("#autocomplete").val("");
             return;
         }
-        wapp.coords[0] = wapp.autocomplete.gm_accessors_.place.Fc.place.geometry.viewport.f.f;
-        wapp.coords[1] = wapp.autocomplete.gm_accessors_.place.Fc.place.geometry.viewport.b.f;
-        wapp.place = wapp.autocomplete.gm_accessors_.place.Fc.place.name;
+        wapp.coords[0] = wapp.autocomplete.gm_accessors_.place.Ec.place.geometry.viewport.f.f;
+        wapp.coords[1] = wapp.autocomplete.gm_accessors_.place.Ec.place.geometry.viewport.b.f;
+        wapp.place = wapp.autocomplete.gm_accessors_.place.Ec.place.name;
         wapp.searchflag = true;
         $("#autocomplete").val("");
         getWeather();
