@@ -24,6 +24,7 @@ wapp.picturelinks = {
 $(document).ready(function ()
 {
     // Get and display the default weather (Media, PA)
+    displayLoading();
     getWeather();
     // Display a working/running timer
     var rightNow = new Date();
@@ -32,22 +33,32 @@ $(document).ready(function ()
     setInterval( () => $("#thetime").html(formattedTime()), 1000);
     // Draw the date picker
     $("#date").datepicker();
+
     // Button: Search for weather at a location
     $("#weathersearch").click(function () {
+        
         if (wapp.dbg) console.log("Autocomplete object: ", wapp.autocomplete);
+        if (wapp.dbg) console.log(wapp.autocomplete.getPlace());
         //console.log(wapp.autocomplete.gm_accessors_);
         //console.log(wapp.autocomplete.gm_accessors_.place.Ec.place.geometry.viewport);
-        if (!wapp.autocomplete.gm_accessors_.place.Ec.place)
+        if (!wapp.autocomplete.getPlace())
         {
             $("#autocomplete").attr("placeholder", "Error: pick location before searching");
             $("#autocomplete").val("");
             return;
         }
-        wapp.coords[0] = wapp.autocomplete.gm_accessors_.place.Ec.place.geometry.viewport.f.f;
-        wapp.coords[1] = wapp.autocomplete.gm_accessors_.place.Ec.place.geometry.viewport.b.f;
-        wapp.place = wapp.autocomplete.gm_accessors_.place.Ec.place.name;
+        var place_object = wapp.autocomplete.getPlace();
+        if (wapp.dbg) console.log(place_object.geometry.location.lng());
+        //wapp.coords[0] = wapp.autocomplete.gm_accessors_.place.Ec.place.geometry.viewport.f.f;
+        wapp.coords[0] = place_object.geometry.location.lat();
+        //wapp.coords[1] = wapp.autocomplete.gm_accessors_.place.Ec.place.geometry.viewport.b.f;
+        wapp.coords[1] = place_object.geometry.location.lng();
+        if (wapp.dbg) console.log(wapp.coords[0]);
+        if (wapp.dbg) console.log(wapp.coords[1]);
+        wapp.place = place_object.formatted_address;
         wapp.searchflag = true;
         $("#autocomplete").val("");
+        displayLoading();              
         getWeather();
     });
 
@@ -62,6 +73,7 @@ $(document).ready(function ()
             return;
         }
         wapp.lockout = true;
+        displayLoading();
         getRandomCoord();
         getWeather();
     });
@@ -76,6 +88,7 @@ $(document).ready(function ()
             // Use mylat and mylang to get the weather
             wapp.coords[0] = Number(localStorage.getItem("mylat"));
             wapp.coords[1] = Number(localStorage.getItem("mylong"));
+            displayLoading();
             getWeather();
         }
     });
@@ -99,6 +112,7 @@ $(document).ready(function ()
         modal: true,
         buttons: {
             "Sounds good!": function () {
+                displayLoading();                
                 getMyLocation();
                 $(this).dialog("close");
             },
@@ -564,6 +578,13 @@ function getWeather() {
     });
 }
 
+function displayLoading(){
+    $("#location").html("Fetching weather data... ");
+    $("span#temp").html("--");    
+    $("#weathertext").html('<i class="fa fa-spinner fa-spin" aria-hidden="true"></i>');
+
+}
+
 // Show the weather data
 function displayWeather() {
     // If we're nowhere, try another random location to see if we get somwhere
@@ -603,6 +624,8 @@ function displayWeather() {
     // Store the cache in local storage
     localStorage.setItem("cache", JSON.stringify(wapp.cache));
     // Show all of the data
+    if (wapp.dbg) console.log("Setting new text for the location!");
+    if (wapp.dbg) console.log(wapp.place);
     $("#location").html(wapp.place);
     $("#weathertext").html(wapp.weatherstring);
     if (wapp.units === "F") {
