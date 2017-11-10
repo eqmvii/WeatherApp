@@ -8,7 +8,7 @@
 
 var wapp = {}; // object to hold the app's variables
 wapp.coords = [42.03, -93.63];
-wapp.dbg = true; // true for debugging console logs, otherwise false
+wapp.dbg = false; // true for debugging console logs, otherwise false
 wapp.units = "F"; // C or F; default F
 wapp.lockout = false; // rate limiter on API requests from clicking the random button
 wapp.searchflag = false; // flag when better data exists for the place name

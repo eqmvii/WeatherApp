@@ -1,15 +1,17 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <link rel="stylesheet" type="text/css" href="weather.css" />
-    <link rel="stylesheet" type ="text/css" href="./jqueryui/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="./jqueryui/jquery-ui.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <!--Font Awesome icons for social media buttons-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./jqueryui/external/jquery/jquery.js"></script>
     <script src="./jqueryui/jquery-ui.min.js"></script>
     <meta charset="utf-8" />
-    <title>Weather App</title>
+    <title>Weather Map - EQMVII</title>
 </head>
 
 <body>
@@ -17,69 +19,78 @@
         <h1 id="banner"></h1>
     </div>
     <div id="foraline"></div>
-        <div id="flexcontainer">
+    <div id="flexcontainer">
 
-            <div id="item5" class="flexitem">
-                <br />
-                <img src="./img/sunny.png" id="weatherpicture" />
-            </div>
-
-            <div id="item2" class="flexitem">
-                <h3 id="location">No data, fake or otherwise, pulled.</h3>
-                <h1><span id="temp"></span>° <span id="units">F</span></h1>
-                <h3 id="weathertext">Sunny</h3>
-                <br />
-                <h4 id="thetime">:</h4>
-                <h4 id="thedate">:</h4>
-            </div>
-
-            <div id="item6" class="flexitem">
-                <div id="map">[Map load error and/or map turned off]</div>
-            </div>
-
-            <div id="item4" class="flexitem">
-                <div id="datehouse"><div id="date"></div></div>
-            </div>
-
-            <div id="item1" class="flexitem">
-                <input id="autocomplete" placeholder="Search for weather data..." onFocus="geolocate()" type="text" /><br />
-                <a href="#" id="weathersearch" class="controlButton">Submit</a>
-            </div>
-
-            <div id="item3" class="flexitem">
-                <a href="#" class="controlButton" id="changeunits">C/F</a>
-                <a href="#" class="controlButton" id="rnd">Random</a><br />
-                <a href="#" class="controlButton" id="myloc">My location</a>
-                <a href="#" id="clearcache" class="controlButton">ClearMem</a><br />
-                <a href="#" id="no" class="controlButton">Mayhem</a>
-            </div>
-
+        <div id="item5" class="flexitem">
+            <br />
+            <img src="./img/sunny.png" id="weatherpicture" />
         </div>
 
+        <div id="item2" class="flexitem">
+            <h3 id="location">No data, fake or otherwise, pulled.</h3>
+            <h1>
+                <span id="temp"></span>°
+                <span id="units">F</span>
+            </h1>
+            <h3 id="weathertext">Sunny</h3>
+            <br />
+            <h4 id="thetime">:</h4>
+            <h4 id="thedate">:</h4>
+        </div>
+
+        <div id="item6" class="flexitem">
+            <div id="map">[Map load error and/or map turned off]</div>
+        </div>
+
+        <div id="item4" class="flexitem">
+            <div id="datehouse">
+                <div id="date"></div>
+            </div>
+        </div>
+
+        <div id="item1" class="flexitem">
+            <input id="autocomplete" placeholder="Search for weather data..." onFocus="geolocate()" type="text" />
+            <br />
+            <a href="#" id="weathersearch" class="controlButton">Submit</a>
+        </div>
+
+        <div id="item3" class="flexitem">
+            <a href="#" class="controlButton" id="changeunits">C/F</a>
+            <a href="#" class="controlButton" id="rnd">Random</a>
+            <br />
+            <a href="#" class="controlButton" id="myloc">My location</a>
+            <!-- <a href="#" id="clearcache" class="controlButton">ClearMem</a> -->
+            <a href="#" id="no" class="controlButton">Mayhem</a>
+        </div>
+
+    </div>
+
+    <br />
+    <div id="footer">
+        <a href="https://www.facebook.com/profile.php?id=420006" target="_blank" class="fa fa-facebook"></a>
+        <a href="https://twitter.com/eqmvii" target="_blank" class="fa fa-twitter"></a>
+        <a href="https://github.com/eqmvii" target="_blank" class="fa fa-github"></a>
+        <a href="https://www.reddit.com/user/eqmvii" target="_blank" class="fa fa-reddit"></a>
         <br />
-        <div id="footer">
-                <a href="https://github.com/eqmvii" target="_blank" class="fa fa-facebook"></a>
-                <a href="https://github.com/eqmvii" target="_blank" class="fa fa-twitter"></a>
-                <a href="https://github.com/eqmvii" target="_blank" class="fa fa-github"></a>
-                <a href="https://github.com/eqmvii" target="_blank" class="fa fa-linkedin"></a>
-                <a href="https://github.com/eqmvii" target="_blank" class="fa fa-reddit"></a>
-                <br />
-                <p class="footertext">Built using OpenWeatherMap and Google APIs. Terrible MS paint weather pictures by Eric.</p><p class="footertext"> All social media buttons intentionally point to github, others for aesthetics only. </p>
-            <p id="footertextsmaller">Void where prohibited. Some restrictions may apply.</p>
-        </div>
+        <p class="footertext">Built using OpenWeatherMap and Google APIs. Terrible MS paint weather pictures by Eric.</p>
+        <p id="footertextsmaller">Void where prohibited. Some restrictions may apply.</p>
+    </div>
 
-        <div id="hiddenitems" class="hiddenitems">
-            <div id="dialog-mayhem" title="This is a bad idea">
-                <p>You pressed the 'Mayhem' button. If you proceed, the entire site will become unstable and/or fall apart immediately. Continue?</p>
-            </div>
-            <div id="dialog-myloc" title="Allow location access">
-                <p>Your browser will ask to use your location to find the weather (NOTE: Click only once and wait, may take a few seconds)</p>
-            </div>
+    <div id="hiddenitems" class="hiddenitems">
+        <div id="dialog-mayhem" title="This is a bad idea">
+            <p>You pressed the 'Mayhem' button. If you proceed, the entire site will become unstable and/or fall apart immediately.
+                Continue?</p>
         </div>
-    
+        <div id="dialog-myloc" title="Allow location access">
+            <p>Your browser will ask to use your location to find the weather (NOTE: Click only once and wait, may take a few
+                seconds)</p>
+        </div>
+    </div>
+
     <script src="weather.js" type="text/javascript"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA9LyCmC6m78DoWS-cRB3y4zem8GlLHfiA&libraries=places&callback=initMap"
-            async defer></script>   
+        async defer></script>
 
 </body>
+
 </html>
