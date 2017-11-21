@@ -2,6 +2,8 @@
 
 View local weather or search for weather in other locations. Built with APIs from OpenWeatherMap and Google Maps.
 
+See it live: https://eqmvii.github.io/WeatherApp/weather.html
+
 Coded in HTML, CSS, and JavaScript using jQueryUI. 
 
 * Displays local weather by using the navigator to get user's location (has issues on Chrome)
